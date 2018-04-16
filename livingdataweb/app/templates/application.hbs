@@ -1,0 +1,14 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <ul>
+        {{#each model.results as |person|}}
+          <li>{{#link-to 'person' person.personId}}{{person.personName}}{{/link-to}}</li>
+        {{/each}}
+      </ul>
+    </div>
+    <div class="col-md-6">
+      {{outlet}}
+    </div>
+  </div>
+</div>

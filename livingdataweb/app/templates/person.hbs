@@ -1,0 +1,49 @@
+<div class="col-md-6">
+  {{#if isEditing}}
+    <p>FirstName: {{input value=model.meta.firstName}}</p>
+    <p>LastName: {{input value=model.meta.lastName}}</p>
+    <p>Eye Color: {{input value=model.meta.eyeColor}}</p>
+    <p>Hair Color: {{input value=model.meta.hairColor}}</p>
+    <p>Height: {{input value=model.meta.height}}</p>
+    <p>Weight: {{input value=model.meta.weight}}</p>
+    <p>Age: {{input value=model.meta.age}}</p>
+  {{else}}
+    <p>FirstName: {{model.meta.firstName}}</p>
+    <p>LastName: {{model.meta.lastName}}</p>
+    <p>Eye Color: {{model.meta.eyeColor}}</p>
+    <p>Hair Color: {{model.meta.hairColor}}</p>
+    <p>Height: {{model.meta.height}}</p>
+    <p>Weight: {{model.meta.weight}}</p>
+    <p>Age: {{model.meta.age}}</p>
+  {{/if}}
+  <p>
+    <button {{action "toggleEdit"}}>{{#if isEditing}}Save{{else}}Edit{{/if}}</button>
+    {{#if isEditing}}
+      <button {{action "cancelEdit"}}>Cancel</button>
+    {{/if}}
+  </p>
+</div>
+<div class="col-md-6">
+  <p>Account balance: {{model.accountSummary.currentBalance}}</p>
+</div>
+<div class="col-md-6">
+  <p>Transactions</p>
+  <table class="table table-striped">
+    <tr>
+      <th>Time</th>
+      <th>Amount</th>
+    </tr>
+    <tbody>
+    {{#each model.accountTransactions.results as |accountTransaction|}}
+      <tr>
+        <td>{{moment-format accountTransaction.timeStamp 'M/D/YY h:mm:ss a'}}</td>
+        <td>${{accountTransaction.amount}}</td>
+      </tr>
+    {{/each}}
+    </tbody>
+  </table>
+  <p>Add Transaction<br/>
+    {{input value=amount}}
+    <button {{action "postValue"}}>Post Amount</button>
+  </p>
+</div>
